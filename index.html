@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hydraVID - Video Compressor</title>
+  <link rel="stylesheet" href="layout.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="logo-box">
+        <span class="brand-name">hydraVID</span>
+      </div>
+      <div class="version-tag">v1.0.0</div>
+    </header>
+
+    <main class="main-grid">
+      
+      <section class="card drop-zone" id="dropZone">
+        <input type="file" id="fileInput" accept="video/*" hidden />
+        <div class="drop-content" id="dropContent">
+          <svg class="upload-icon" width="44" height="44" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+          <p>Drag & Drop your video here or <span class="browse-btn">Browse</span></p>
+          <small>Supports MP4, WebM, MOV, MKV</small>
+        </div>
+        <div class="track-info" id="trackInfo" hidden>
+          <span class="track-name" id="trackName">video.mp4</span>
+          <span class="track-meta" id="trackMeta">Resolution: -- | Duration: --</span>
+        </div>
+      </section>
+
+      
+      <section class="right-top-group">
+        <div class="card preview-card">
+          <h2>Video Preview Stage</h2>
+          <div class="preview-stage">
+            <p class="placeholder-text" id="placeholderText">Upload a video file to preview</p>
+            <div id="playerWrapper" class="player-wrapper" hidden>
+              <video id="videoPreview" controls></video>
+            </div>
+          </div>
+          <div class="progress-container" id="progressContainer" hidden>
+            <div class="progress-bar" id="progressBar"></div>
+            <span class="progress-text" id="progressText">Processing... 0%</span>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="card controls-card">
+        <h2>Video Encoding Controls</h2>
+        
+        <div class="controls-grid">
+          <div class="control-group">
+            <label for="resolutionSelect">Resolution / Scale:</label>
+            <select id="resolutionSelect">
+              <option value="1.0" selected>Original Resolution (100%)</option>
+              <option value="0.75">HD Scale (75%)</option>
+              <option value="0.5">SD Scale (50% / Compact)</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="qualitySelect">Target Quality / Bitrate:</label>
+            <select id="qualitySelect">
+              <option value="high">High Fidelity (Larger Size)</option>
+              <option value="medium" selected>Balanced Compression</option>
+              <option value="low">Maximum Compression (Smallest)</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="audioStripSelect">Audio Track:</label>
+            <select id="audioStripSelect">
+              <option value="keep" selected>Keep Original Audio</option>
+              <option value="mute">Mute / Strip Audio (Max Size Reduction)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="right-bottom-group">
+        <div class="card details-card">
+          <div class="detail-box">
+            <span class="label">Original Size</span>
+            <span class="value" id="origSize">0 MB</span>
+          </div>
+          <div class="detail-box">
+            <span class="label">Compressed Size</span>
+            <span class="value" id="compSize">0 MB</span>
+          </div>
+          <div class="detail-box highlight">
+            <span class="label">Saved</span>
+            <span class="value" id="savedRatio">0%</span>
+          </div>
+        </div>
+
+        <div class="card export-card">
+          <h2>Export Pipeline</h2>
+          <div class="export-actions">
+            <button class="btn primary" id="compressBtn" disabled>Compress Video</button>
+            <button class="btn secondary" id="downloadVideoBtn" disabled>Download Video</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="video-app.js"></script>
+</body>
+</html>
